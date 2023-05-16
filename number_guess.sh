@@ -40,3 +40,8 @@ do
     echo "It's higher than that, guess again:"
   fi
 done
+
+echo "You guessed it in $GUESSES tries. The secret number was $SECRET. Nice job!"
+
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE username = '$USERNAME';")
+echo $($PSQL "INSERT INTO games(user_id, guesses) VALUES($USER_ID, $GUESSES);") >> /dev/null
